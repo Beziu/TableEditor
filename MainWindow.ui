@@ -11,11 +11,50 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>TableEditor</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuExtra">
+    <property name="title">
+     <string>&amp;Import</string>
+    </property>
+    <addaction name="actionPostCodes"/>
+    <addaction name="actionAddressBook"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuExtra"/>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+  </action>
+  <action name="actionPostCodes">
+   <property name="text">
+    <string>Post Codes</string>
+   </property>
+  </action>
+  <action name="actionAddressBook">
+   <property name="text">
+    <string>Address Book</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
