@@ -29,6 +29,8 @@ public:
 private slots:
     void on_actionExit_triggered();
 
+    void on_actionPostCodes_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -43,7 +45,7 @@ private:
     void enableDatabase(bool);
     qint64 getFileSize(const QString &fileName);
     int getRecordCount(const QString &fileName);
-
+    bool openDatabase(const QString &server, const QString &database);
 
 
     void closeEvent(QCloseEvent *event) override;

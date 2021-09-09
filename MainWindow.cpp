@@ -66,6 +66,27 @@ void MainWindow::init()
     // Dodanie paska postepu do paska stanu
     statusBar()->addPermanentWidget(progressBar);
 
+    enableDatabase(openDatabase("localhost:188", "AddressBook"));
+
+}
+
+void MainWindow::enableDatabase(bool bEnable)
+{
+    ui->menuImport->setEnabled(bEnable);
+
+    if (bEnable)
+        statusLabel->setText("Databank: " + DAOLib::getDatabaseName());
+    else
+        statusLabel->setText("Databank: (none!)");
+}
+
+bool MainWindow::openDatabase(const QString &server, const QString &database)
+{
+    QString driver = "ODBC";
+    QString driverName = "DRIVER={SQL Server}";
+
+    return DAOLib::connectToDatabase(driver, driverName, server, database);
+
 }
 
 qint64 MainWindow::getFileSize(const QString &fileName)
@@ -85,12 +106,26 @@ qint64 MainWindow::getFileSize(const QString &fileName)
 
 int MainWindow::getRecordCount(const QString &fileName)
 {
+    int retValue = 0;
 
+    QFile file(fileName);
+
+    if (file.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream in(&file);
+
+        while (!in.atEnd())
+        {
+            in.readLine();
+            retValue++;
+        }
+
+        file.close();
+    }
+
+    return retValue;
 
 }
-
-
-
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
@@ -108,6 +143,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Escape)
         stopImport = true;
+
+}
+
+
+void MainWindow::on_actionPostCodes_triggered()
+{
 
 }
 

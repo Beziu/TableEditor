@@ -27,9 +27,11 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionConnectToDatabase"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuExtra">
+   <widget class="QMenu" name="menuImport">
     <property name="title">
      <string>&amp;Import</string>
     </property>
@@ -37,7 +39,7 @@
     <addaction name="actionAddressBook"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuExtra"/>
+   <addaction name="menuImport"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
@@ -53,6 +55,11 @@
   <action name="actionAddressBook">
    <property name="text">
     <string>Address Book</string>
+   </property>
+  </action>
+  <action name="actionConnectToDatabase">
+   <property name="text">
+    <string>Connect to database</string>
    </property>
   </action>
  </widget>
