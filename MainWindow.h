@@ -5,8 +5,12 @@
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QTranslator>
+#include <QLibraryInfo>
 #include <QCloseEvent>
 #include <QKeyEvent>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
 
 
 QT_BEGIN_NAMESPACE
@@ -28,21 +32,22 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QTranslator *translator;
-    QLabel *statuslabel;
+    QTranslator *qtTranslator;
+    QLabel *statusLabel;
     QProgressBar *progressBar;
+
+    bool importIsRunning;
+    bool stopImport;
+
+    void init();
+    void enableDatabase(bool);
+    qint64 getFileSize(const QString &fileName);
+    int getRecordCount(const QString &fileName);
+
+
 
     void closeEvent(QCloseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
 
-    void init();
-    bool importIsRunning;
-    bool stopImport;
-
-
-
-
-
-    Q_PROPERTY(QTranslator * translator READ getTranslator CONSTANT)
 };
 #endif // MAINWINDOW_H

@@ -1,10 +1,17 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "DAOLib.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    // Deklaracja dla translatora
+    qtTranslator = new QTranslator();
+    if (qtTranslator->load("qt_en", QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+        QApplication::installTranslator(qtTranslator);
+
     ui->setupUi(this);
 
     init();
@@ -35,7 +42,55 @@ void MainWindow::init()
     // Drugi parametr stretch = 1 rozciąga etykietę na cały pasek stanu.
     statusBar()->addWidget(statusLabel, 1);
 
+    // Deklaracja nowego paska postepu
+    progressBar = new QProgressBar(this);
+
+    // Deklaracja stylu w postaci ciagu znakow
+    QString styleSheet = "QProgressBar";
+    styleSheet += "{border: 2px solid grey;";
+    styleSheet += "border-radius: 5px;";
+    styleSheet += "text-align: center;}";
+    styleSheet += "QProgressBar::chunk";
+    styleSheet += "{background-color: lightgreen;";
+    styleSheet += "width: 10px; margin: 1px;}";
+
+    // Przypisanie stylu do paska postepu
+    progressBar->setStyleSheet(styleSheet);
+
+    // Ustawienie stalej szerokosci
+    progressBar->setFixedWidth(200);
+
+    // Deklaracja zeby nie bylo go widac
+    progressBar->setVisible(false);
+
+    // Dodanie paska postepu do paska stanu
+    statusBar()->addPermanentWidget(progressBar);
+
 }
+
+qint64 MainWindow::getFileSize(const QString &fileName)
+{
+    qint64 retValue = 0;
+
+    QFile file(fileName);
+    if (file.open(QFile::ReadOnly))
+    {
+        retValue = file.size();
+        file.close();
+    }
+
+    return retValue;
+
+}
+
+int MainWindow::getRecordCount(const QString &fileName)
+{
+
+
+}
+
+
+
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
