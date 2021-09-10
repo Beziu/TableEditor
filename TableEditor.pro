@@ -31,3 +31,4 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DAOLib-Desktop
 
 INCLUDEPATH += $$PWD/../DAOLib
 DEPENDPATH += $$PWD/../DAOLib
+

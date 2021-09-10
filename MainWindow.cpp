@@ -66,13 +66,14 @@ void MainWindow::init()
     // Dodanie paska postepu do paska stanu
     statusBar()->addPermanentWidget(progressBar);
 
-    enableDatabase(openDatabase("localhost:188", "AddressBook"));
+    enableDatabase(openDatabase("127.0.0.1:3306", "postcodes"));
 
 }
 
 void MainWindow::enableDatabase(bool bEnable)
 {
     ui->menuImport->setEnabled(bEnable);
+    ui->actionPostCodes->setEnabled(bEnable);
 
     if (bEnable)
         statusLabel->setText("Databank: " + DAOLib::getDatabaseName());
@@ -82,10 +83,11 @@ void MainWindow::enableDatabase(bool bEnable)
 
 bool MainWindow::openDatabase(const QString &server, const QString &database)
 {
-    QString driver = "ODBC";
-    QString driverName = "DRIVER={SQL Server}";
+    QString driver = "QMYSQL";
+    QString user = "root";
+    QString passwd = "";
 
-    return DAOLib::connectToDatabase(driver, driverName, server, database);
+    return DAOLib::connectToDatabase(driver, server, user, passwd, database);
 
 }
 
