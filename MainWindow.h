@@ -10,6 +10,7 @@
 #include <QKeyEvent>
 #include <QFile>
 #include <QDir>
+#include <QFileDialog>
 #include <QDebug>
 
 
@@ -42,10 +43,13 @@ private:
     bool stopImport;
 
     void init();
-    void enableDatabase(bool);
     qint64 getFileSize(const QString &fileName);
-    int getRecordCount(const QString &fileName);
+
+    void enableDatabase(bool);
     bool openDatabase(const QString &server, const QString &database);
+    int getRecordCount(const QString &fileName);
+    void importPostCodes();
+    void importPostCodesIntoDatabase(const QString &filkename);
 
 
     void closeEvent(QCloseEvent *event) override;
