@@ -35,6 +35,9 @@ QSqlTableModel *PostCodes::setTableViewModel()
 
     model->sort(model->record().indexOf("CODE"), Qt::SortOrder::AscendingOrder);
 
+    model->setHeaderData(model->record().indexOf("code"), Qt::Horizontal, "PostCode");
+    model->setHeaderData(model)
+
 
 
 
