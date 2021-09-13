@@ -29,17 +29,21 @@ private slots:
 
     void on_actionDelete_triggered();
 
+    void updateTableView(const qint64 key);
+
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::PostCodes *ui;
 
     QLabel *statusLabel;
+    QSqlTableModel *setTableViewModel();
 
     void init();
     void showTable();
     void deleteEntry(const QModelIndex index);
-
-    QSqlTableModel *setTableViewModel();
-
+    void findItemInTableView(const QString &columnName, const QVariant &value);
+    bool eventFilter(QObject *sender, QEvent *event) override;
 
 
 };
