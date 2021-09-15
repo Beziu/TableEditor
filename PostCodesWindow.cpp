@@ -149,7 +149,7 @@ void PostCodes::showPostCodesDialog(const qint64 key)
     PostCodesDialog pcDialog(key, this);
 
     // sygnal dla nowego okna
-    //connect
+    connect(&pcDialog, SIGNAL(refreshData(const qint64)), this, SLOT(updateTableView(const qint64)));
 
     pcDialog.exec();
 

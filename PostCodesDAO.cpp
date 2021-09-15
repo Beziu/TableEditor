@@ -33,6 +33,17 @@ bool PostCodesDAO::postCodeExists(const QString &code, const QString &city)
 
 }
 
+bool PostCodesDAO::updatePostCode(qint64 key, const QString &code, const QString &city)
+{
+    QString sql = "UPDATE POSTCODES ";
+    sql += "SET CODE = " + DAOLib::dbString(code) + ", ";
+    sql += "CITY = " + DAOLib::dbString(city);
+    sql += "WHERE PRIMARYKEY = " + QString::number(key);
+
+    return DAOLib::executeNonQuery(sql) > 0;
+
+}
+
 void PostCodesDAO::deleteTable()
 {
     QString sql = "TRUNCATE TABLE POSTCODES";
@@ -53,6 +64,20 @@ int PostCodesDAO::getRowCount()
         return 0;
     else
         return count.toInt();
+
+}
+
+qint64 PostCodesDAO::getLastIdentity()
+{
+    QString sql = "SELECT @@IDENTITY";
+    bool ok;
+
+    QVariant identity = DAOLib::executeScalar(sql, ok);
+
+    if (!ok)
+        return -1;
+    else
+        return identity.toLongLong();
 
 }
 
