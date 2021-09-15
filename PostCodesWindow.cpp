@@ -2,6 +2,7 @@
 #include "ui_PostCodesWindow.h"
 
 #include "PostCodesDAO.h"
+#include "PostCodesDialog.h"
 
 PostCodes::PostCodes(QWidget *parent) :
     QMainWindow(parent),
@@ -143,6 +144,17 @@ void PostCodes::deleteEntry(const QModelIndex index)
 
 }
 
+void PostCodes::showPostCodesDialog(const qint64 key)
+{
+    PostCodesDialog pcDialog(key, this);
+
+    // sygnal dla nowego okna
+    //connect
+
+    pcDialog.exec();
+
+}
+
 void PostCodes::findItemInTableView(const QString &columnName, const QVariant &value)
 {
     int row;
@@ -221,16 +233,22 @@ void PostCodes::on_tableView_doubleClicked(const QModelIndex &index)
     QSqlTableModel *model = static_cast<QSqlTableModel*>(ui->tableView->model());
 
     // Nowe okno do edycji wpisu
+    showPostCodesDialog(model->record(index.row()).value("PRIMARYKEY").toULongLong());
 
 }
 
 void PostCodes::on_actionNew_triggered()
 {
-
+    showPostCodesDialog(-1);
 }
 
 void PostCodes::on_actionEdit_triggered()
 {
+    QSqlTableModel *model = static_cast<QSqlTableModel*>(ui->tableView->model());
+
+    QModelIndex index = ui->tableView->currentIndex();
+
+    showPostCodesDialog(model->record(index.row()).value("PRIMARYKEY").toLongLong());
 
 }
 

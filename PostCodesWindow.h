@@ -42,6 +42,7 @@ private:
     void init();
     void showTable();
     void deleteEntry(const QModelIndex index);
+    void showPostCodesDialog(const qint64 key);
     void findItemInTableView(const QString &columnName, const QVariant &value);
     bool eventFilter(QObject *sender, QEvent *event) override;
 

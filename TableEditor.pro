@@ -12,6 +12,7 @@ CONFIG += c++11
 SOURCES += \
     PostCode.cpp \
     PostCodesDAO.cpp \
+    PostCodesDialog.cpp \
     PostCodesWindow.cpp \
     main.cpp \
     MainWindow.cpp
@@ -20,10 +21,12 @@ HEADERS += \
     MainWindow.h \
     PostCode.h \
     PostCodesDAO.h \
+    PostCodesDialog.h \
     PostCodesWindow.h
 
 FORMS += \
     MainWindow.ui \
+    PostCodesDialog.ui \
     PostCodesWindow.ui
 
 # Default rules for deployment.
