@@ -29,6 +29,9 @@ FORMS += \
     PostCodesDialog.ui \
     PostCodesWindow.ui
 
+TRANSLATIONS = \
+    TableEditor_en.ts
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -39,4 +42,7 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DAOLib-Desktop
 
 INCLUDEPATH += $$PWD/../DAOLib
 DEPENDPATH += $$PWD/../DAOLib
+
+DISTFILES += \
+    TableEditor_en.ts
 
